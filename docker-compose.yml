@@ -1,0 +1,23 @@
+--- 
+services: 
+  eureka-consumer: 
+    depends_on: 
+      - eureka-server
+    image: winkeyes/eureka-consumer
+    environment:
+      EUREKA_URI: 'http://eureka-server:8761/eureka'
+    ports: 
+      - "9098:9098"
+  eureka-producer: 
+    depends_on: 
+      - eureka-server
+    image: winkeyes/eureka-producer
+    environment:
+      EUREKA_URI: 'http://eureka-server:8761/eureka'
+    ports: 
+      - "8097:8097"
+  eureka-server: 
+    image: winkeyes/eureka-server
+    ports: 
+      - "8761:8761"
+version: "2"
